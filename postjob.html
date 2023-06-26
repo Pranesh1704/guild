@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="postjob.css">
+    <title>Post-Job</title>
+</head>
+
+<body>
+    <div class="container">
+        <form action="" id="postJob">
+            <div class="alert"> Job Posted Successfully !</div>
+
+            <div class="inputbox">
+                <input type="text" id="name" placeholder="Enter your Name" required />
+                <label for="name">Username</label>
+            </div>
+
+
+            <div class="inputbox">
+                <input type="email" id="emailid" placeholder="Enter your e-mail" required />
+                <label for="emailid">Email</label>
+            </div>
+
+
+            <div class="inputbox">
+                <input type="text" id="jt" placeholder="Job Title" required />
+                <label for="jt">Job Title</label>
+            </div>
+
+
+
+            <div class="inputbox textarea">
+                <textarea name="jd" id="jobcontent" placeholder="Job-description" required></textarea>
+                <label for="jd" id="lbl">Job Description</label>
+            </div>
+            <!-- <div class="inputbox">
+                <input type="number" id="rs" placeholder="Reward money in Rupees ">
+            </div> -->
+
+            <div class="skills">
+                <h2>Skills Required</h2>
+                <div class="checkbox-field">
+                    <input type="checkbox" name="skill" id="html" value="html"><label for="html">html</label>
+                </div>
+
+                <div class="checkbox-field">
+                    <input type="checkbox" name="skill" id="css" value="css"><label for="css">css</label>
+                </div>
+
+                <div class="checkbox-field">
+                    <input type="checkbox" name="skill" id="javascript" value="javascript"><label
+                        for="javascript">javascript</label>
+                </div>
+
+                <div class="checkbox-field">
+                    <input type="checkbox" name="skill" id="photoshop" value="photoshop"><label
+                        for="photoshop">photoshop</label>
+                </div>
+
+                <div class="checkbox-field">
+                    <input type="checkbox" name="skill" id="blender" value="blender"><label
+                        for="blender">blender</label>
+                </div>
+
+                <div class="checkbox-field">
+                    <input type="checkbox" name="skill" id="aftereffects" value="aftereffects"><label
+                        for="aftereffects">aftereffects</label>
+                </div>
+
+                <div class="checkbox-field">
+                    <input type="checkbox" name="skill" id="krita" value="krita"><label for="krita">krita</label>
+                </div>
+
+                <div class="checkbox-field">
+                    <input type="checkbox" name="skill" id="android" value="android"><label
+                        for="android">android</label>
+                </div>
+            </div>
+
+            <!-- <div class="inputbox">
+                <input type="file" id="files" placeholder="Attach Files">
+            </div> -->
+            <div class="inputbox">
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
+<script>
+    const firebaseConfig = {
+        apiKey: "AIzaSyAjRl8lgrW_p-z64Wbdu6XjnUHYR7WiRBU",
+        authDomain: "post-job-1e7c5.firebaseapp.com",
+        databaseURL: "https://post-job-1e7c5-default-rtdb.firebaseio.com",
+        projectId: "post-job-1e7c5",
+        storageBucket: "post-job-1e7c5.appspot.com",
+        messagingSenderId: "681704307806",
+        appId: "1:681704307806:web:bebd9ff082cba7395d08cf"
+    };
+
+    // Initialization
+    firebase.initializeApp(firebaseConfig);
+
+    let postJobDB = firebase.database().ref('postJob')
+
+    document.getElementById('postJob').addEventListener('submit', submitForm = (e) => {
+        e.preventDefault();
+
+        let name = getEleVal('name');
+        let emailid = getEleVal('emailid');
+        let jd = getEleVal('jobcontent');
+        let jt = getEleVal('jt');
+        let skill = getSkills();
+        // let files = getEleVal('files');
+
+        saveMessages(name, emailid, jt, jd, skill);
+        document.querySelector('.alert').style.display = 'block';
+
+        setTimeout(() => {
+            document.querySelector(".alert").style.display = "none";
+        }, 1000);
+
+        setTimeout(() => {
+            location.href = "index2.html";
+        }, 1000);
+    });
+
+    const saveMessages = (name, emailid, jt, jd, skill) => {
+        let newPostJobForm = postJobDB.push();
+
+        newPostJobForm.set({
+            name: name,
+            emailid: emailid,
+            jt: jt,
+            jd: jd,
+            skill: skill
+            // files: files
+        })
+    }
+
+    const getEleVal = (id) => {
+        return document.getElementById(id).value;
+    }
+
+
+    //skill function
+    let getSkills = () => {
+        let skills = document.getElementsByName('skill');
+        let array = [];
+        for (let i = 0; i < skills.length; i++) {
+            if (skills[i].checked) {
+                array.push(skills[i].value);
+            }
+        }
+        return array;
+    }
+
+
+</script>
+
+</html>
+
+<!-- <div class="choise">
+    <h4>gender</h4>
+    <div class="radio">
+        <input type="radio" name="gender" id="female" value="female"><label for="female">Female</label>
+    </div>
+    <div class="radio">
+        <input type="radio" name="gender" id="male" value="male"<label for="male">Male</label>
+    </div>
+</div> -->

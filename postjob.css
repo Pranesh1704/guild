@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+html,
+body {
+  display: grid;
+  height: 100%;
+  width: 100%;
+  place-items: center;
+  background: -webkit-linear-gradient(left, #f7f3f3, #ffffff);
+}
+
+.container {
+  width: 250px;
+  background: #dadada;
+  border: 3px solid white;
+  width: 30%;
+  /* height: 500px;/ */
+  /* background: green; */
+  border-radius: 10px;
+
+}
+
+.inputbox {
+  padding: 0 15px;
+  margin: 1.4rem auto;
+  position: relative;
+}
+
+.inputbox input {
+  border: none;
+  padding: 10px;
+  width: 100%;
+  border-radius: 3px;
+  outline: none;
+}
+
+.inputbox textarea {
+  width: 100%;
+  height: 150px;
+  border-radius: 3px;
+}
+
+::placeholder {
+  color: transparent;
+}
+
+.inputbox label {
+  position: absolute;
+  top: 8px;
+  left: 18px;
+  pointer-events: none;
+  transition: .5s;
+}
+
+button {
+  width: 100px;
+  display: block;
+  margin: 0 auto;
+  border: 1.5px solid rgb(248, 248, 248);
+  border-radius: 10px;
+  padding: 6px 20px;
+  font-weight: bold;
+  background: none;
+  color: darkslategray;
+  cursor: pointer;
+  background: -webkit-linear-gradient(right, #fbbc51, #ffcb74);
+}
+
+.inputbox input:focus~label,
+.inputbox input:not(:placeholder-shown)~label {
+  top: -18px;
+  font-size: 12px;
+}
+
+#lbl {
+  top: -6px;
+  font-size: 15px;
+}
+
+textarea {
+  margin-top: 19px;
+}
+
+button:hover {
+  color: white;
+  background: rgb(36, 33, 33);
+  transition: 0.2s ease;
+}
+
+.alert {
+  width: 100%;
+  color: #ffffff;
+  background: rgb(7, 205, 227);
+  border-radius: 10px;
+  padding: 8px 15px;
+  text-align: center;
+  font-weight: 900;
+  font-size: 18px;
+  display: none;
+}
+
+.skills {
+  /* display: flex; */
+  width: 100%;
+  padding: 0 1rem;
+  /* border: 2px solid black; */
+  border-radius: 3px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.skills h2 {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.skills .checkbox-field {
+  margin: 8px;
+  display: inline-block;
+
+}
+
+.skills label {
+  border: 1px solid black;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 3px 1rem;
+}
+
+.skills input[type='checkbox'] {
+  display: none;
+}
+
+.skills input:checked~label {
+  background: gray;
+  color: white;
+  border: 1px solid transparent;
+}

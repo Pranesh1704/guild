@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="accept.css">
+    <title>accept-Job</title>
+</head>
+
+<body>
+    <div class="container">
+        <form action="" id="AcceptJob">
+            <div class="alert"> Accept Form Submitted</div>
+
+            <div class="inputbox">
+                <input type="text" id="name" placeholder="Enter Your Name" required><label for="name">Enter Your
+                    Name</label>
+            </div>
+            <div class="inputbox">
+                <input type="email" id="email" placeholder="Enter your Email" required><label for="email">Enter Your
+                    Email</label>
+            </div>
+            <div class="inputbox">
+                <input type="text" id="jobid" placeholder="Enter Your Job-Id" required><label for="jobid" id="lbl">Enter
+                    Job-Id</label>
+            </div>
+            <div class="inputbox">
+                <button type="submit">Submit</button>
+            </div>
+
+        </form>
+    </div>
+
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
+
+<script>
+    const firebaseConfig = {
+        apiKey: "AIzaSyC6nGSquLzJkj4L_RrF6QT352EhTMnCg8E",
+        authDomain: "accept-53df4.firebaseapp.com",
+        databaseURL: "https://accept-53df4-default-rtdb.firebaseio.com",
+        projectId: "accept-53df4",
+        storageBucket: "accept-53df4.appspot.com",
+        messagingSenderId: "13698909342",
+        appId: "1:13698909342:web:9729031951fcd1232f278f"
+    };
+    firebase.initializeApp(firebaseConfig);
+
+    let acceptFormDb = firebase.database().ref('acceptForm');
+
+    document.getElementById('AcceptJob')
+        .addEventListener('submit', submitForm);
+
+
+    function submitForm(e) {
+        e.preventDefault();
+
+        var name = getElementVal('name');
+        var email = getElementVal('email');
+        var jobid = getElementVal('jobid');
+
+        saveMessage(name,email,jobid);
+
+        
+        document.querySelector('.alert').style.display='block';
+
+        setTimeout(() => {
+            document.querySelector(".alert").style.display = "none";
+        }, 1000);
+
+
+        document.getElementById('AcceptJob').reset();
+        
+        
+        setTimeout(() => {
+            location.href = "explorejobs.html";
+        }, 1000);
+
+    }
+
+    const saveMessage = (name, email, jobid) => {
+        let newAcceptForm = acceptFormDb.push();
+
+        newAcceptForm.set({
+            name: name,
+            email: email,
+            jobid: jobid
+        });
+ 
+    }
+
+    const getElementVal = (id) => {
+        return document.getElementById(id).value;
+    }
+
+</script>
+
+</html>
